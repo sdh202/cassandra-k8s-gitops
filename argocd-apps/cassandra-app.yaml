@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cassandra-cluster
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/sdh202/cassandra-k8s-gitops.git
+    targetRevision: main
+    path: cassandra
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cass-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
