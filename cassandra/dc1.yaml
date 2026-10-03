@@ -1,0 +1,34 @@
+apiVersion: cassandra.datastax.com/v1beta1
+kind: CassandraDatacenter
+metadata:
+  name: dc1
+  namespace: cass-operator
+spec:
+  clusterName: lab-cluster
+  serverType: cassandra
+  serverVersion: "4.1.5"
+  managementApiAuth:
+    insecure: {}
+  size: 3
+  racks:
+    - name: r1
+    - name: r2
+    - name: r3
+  storageConfig:
+    cassandraDataVolumeClaimSpec:
+      storageClassName: local-path
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 5Gi
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: "0.5"
+    limits:
+      memory: 1.5Gi
+      cpu: "1"
+  config:
+    jvm-server-options:
+      initial_heap_size: "512M"
+      max_heap_size: "512M"
