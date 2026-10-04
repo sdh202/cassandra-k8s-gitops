@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         grafana:
-          adminPassword: "test123"
+          adminPassword: "changeme123"
           service:
             type: ClusterIP
         prometheus:
@@ -34,3 +34,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+      - Replace=true
