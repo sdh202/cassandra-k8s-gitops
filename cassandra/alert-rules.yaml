@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cassandra-alerts
+  namespace: cass-operator
+  labels:
+    release: monitoring-stack
+spec:
+  groups:
+    - name: cassandra.rules
+      rules:
+        - alert: CassandraNodeDown
+          expr: up{namespace="cass-operator"} == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "A Cassandra node has been down for 2+ minutes"
