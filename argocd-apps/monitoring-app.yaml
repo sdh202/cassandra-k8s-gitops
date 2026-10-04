@@ -8,11 +8,11 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: "65.x.x"
+    targetRevision: "65.8.1"
     helm:
       values: |
         grafana:
-          adminPassword: "changeme123"
+          adminPassword: "test123"
           service:
             type: ClusterIP
         prometheus:
@@ -33,3 +33,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
