@@ -1,3 +1,5 @@
+# Source of truth for kube-prometheus-stack.
+# Referenced by argocd-apps/monitoring-app.yaml (Helm valueFiles).
 prometheus:
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
@@ -14,6 +16,8 @@ prometheus:
 
 grafana:
   adminPassword: "admin"
+  service:
+    type: ClusterIP
   resources:
     requests:
       cpu: 50m
