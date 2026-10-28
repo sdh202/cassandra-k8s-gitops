@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cassandra-metrics
+  namespace: cass-operator
+  labels:
+    release: monitoring-stack
+spec:
+  selector:
+    matchLabels:
+      cassandra.datastax.com/cluster: lab-cluster
+  endpoints:
+  - port: metrics
+    interval: 15s
+    path: /metrics
