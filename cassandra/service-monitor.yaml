@@ -10,6 +10,6 @@ spec:
     matchLabels:
       cassandra.datastax.com/cluster: lab-cluster
   endpoints:
-  - port: metrics
+  - port: "9000"
     interval: 15s
     path: /metrics
