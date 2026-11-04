@@ -9,7 +9,18 @@ spec:
   selector:
     matchLabels:
       cassandra.datastax.com/cluster: lab-cluster
+      cassandra.datastax.com/prom-metrics: "true"
   endpoints:
   - port: metrics
-    interval: 15s
+    interval: 30s
+    scrapeTimeout: 15s
     path: /metrics
+    relabelings:
+    - sourceLabels: [__meta_kubernetes_pod_name]
+      targetLabel: pod_name
+    - sourceLabels: [__meta_kubernetes_pod_label_cassandra_datastax_com_rack]
+      targetLabel: rack
+    metricRelabelings:
+    - sourceLabels: [__name__]
+      regex: '(up|process_.*|jvm_.*|org_apache_cassandra_metrics_client_request_.*|org_apache_cassandra_metrics_storage_.*|org_apache_cassandra_metrics_compaction_.*|org_apache_cassandra_metrics_cql_.*)'
+      action: keep
