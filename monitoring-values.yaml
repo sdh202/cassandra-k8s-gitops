@@ -13,6 +13,8 @@ prometheus:
       limits:
         cpu: 500m
         memory: 1Gi
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
 
 grafana:
   adminPassword: "admin"
