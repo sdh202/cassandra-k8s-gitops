@@ -34,3 +34,7 @@ nodeExporter:
 
 kubeStateMetrics:
   enabled: true
+
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false
